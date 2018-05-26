@@ -14,32 +14,35 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Usuario implements Serializable{
-	
+public class Usuario implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	private String email;
 	private String nome;
 	private String senha;
 	private Date dataNascimento;
-	
-	@OneToMany(mappedBy="usuario")
+
+	@OneToMany(mappedBy = "usuario")
 	private List<Grupo> grupos = new ArrayList<>();
-	
-	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Associado> associados = new ArrayList<>();
-	
-	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<EmailEnviado> emailsEnviados = new ArrayList<>();
-	
+
+	@OneToMany(mappedBy = "id.usuario", cascade = CascadeType.ALL)
+	private List<UsuarioEmail> usuarioEmails = new ArrayList<>();
+
 	public Usuario() {
 	}
-	
+
 	public Usuario(String email, String nome, String senha, Date dataNascimento) {
 		super();
 		this.email = email;
@@ -95,7 +98,7 @@ public class Usuario implements Serializable{
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
 	}
-	
+
 	public List<Associado> getAssociados() {
 		return associados;
 	}
@@ -103,13 +106,21 @@ public class Usuario implements Serializable{
 	public void setAssociados(List<Associado> associados) {
 		this.associados = associados;
 	}
-	
+
 	public List<EmailEnviado> getEmailsEnviados() {
 		return emailsEnviados;
 	}
 
 	public void setEmailsEnviados(List<EmailEnviado> emailsEnviados) {
 		this.emailsEnviados = emailsEnviados;
+	}
+
+	public List<UsuarioEmail> getUsuarioEmails() {
+		return usuarioEmails;
+	}
+
+	public void setUsuarioEmails(List<UsuarioEmail> usuarioEmails) {
+		this.usuarioEmails = usuarioEmails;
 	}
 
 	@Override

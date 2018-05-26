@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.springframework.beans.factory.BeanCurrentlyInCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,13 +66,13 @@ public class DBService {
 		grupoRepository.saveAll(Arrays.asList(grupo1, grupo2));
 
 		Email email1 = new Email("Trabalho APS", new Date(System.currentTimeMillis()), null);
-		
+
 		email1 = emailRepository.save(email1);
 
 		EmailEnviado emailEnviado1 = new EmailEnviado(email1, user2);
-		
+
 		user2.getEmailsEnviados().add(emailEnviado1);
-		
+
 		SubEmail subEmail1 = new SubEmail("Já fiz minha parte", new Date(System.currentTimeMillis()), email1, user2);
 		SubEmail subEmail2 = new SubEmail("Já enviei minha parte pra Erica", new Date(System.currentTimeMillis()),
 				email1, user3);
@@ -83,7 +82,11 @@ public class DBService {
 		UsuarioEmail userEmail1 = new UsuarioEmail(email1, user1, TipoEmailEnum.CAIXA_ENTRADA, false);
 		UsuarioEmail userEmail2 = new UsuarioEmail(email1, user2, TipoEmailEnum.CAIXA_ENTRADA, true);
 		UsuarioEmail userEmail3 = new UsuarioEmail(email1, user3, TipoEmailEnum.LIXEIRA, true);
-
+		email1.getUsuarioEmails().addAll(Arrays.asList(userEmail1, userEmail2, userEmail3));
+		user1.getUsuarioEmails().add(userEmail1);
+		user2.getUsuarioEmails().add(userEmail2);
+		user3.getUsuarioEmails().add(userEmail3);
+		
 		emailRepository.saveAll(Arrays.asList(email1));
 		usuarioEmailRepository.saveAll(Arrays.asList(userEmail1, userEmail2, userEmail3));
 		usuarioRepository.saveAll(Arrays.asList(user2));

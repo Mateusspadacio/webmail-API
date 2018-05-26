@@ -16,20 +16,22 @@ import javax.persistence.OneToMany;
 public class Email implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
 	private Date dataCriacao;
 	private Date dataAlteracao;
-	
-	@OneToMany(mappedBy="email", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "email", cascade = CascadeType.ALL)
 	private List<SubEmail> subEmailList = new ArrayList<>();
-		
+
+	@OneToMany(mappedBy = "id.email", cascade = CascadeType.ALL)
+	private List<UsuarioEmail> usuarioEmails = new ArrayList<>();
+
 	public Email() {
 	}
-
 
 	public Email(String titulo, Date dataCriacao, Date dataAlteracao) {
 		super();
@@ -38,57 +40,53 @@ public class Email implements Serializable {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
 	public String getTitulo() {
 		return titulo;
 	}
-
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
-
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
-
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
-
 	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
-
 
 	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	
-
 	public List<SubEmail> getSubEmailList() {
 		return subEmailList;
 	}
-
 
 	public void setSubEmailList(List<SubEmail> subEmailList) {
 		this.subEmailList = subEmailList;
 	}
 
+	public List<UsuarioEmail> getUsuarioEmails() {
+		return usuarioEmails;
+	}
+
+	public void setUsuarioEmails(List<UsuarioEmail> usuarioEmails) {
+		this.usuarioEmails = usuarioEmails;
+	}
 
 	@Override
 	public int hashCode() {
@@ -97,7 +95,6 @@ public class Email implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -115,6 +112,5 @@ public class Email implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

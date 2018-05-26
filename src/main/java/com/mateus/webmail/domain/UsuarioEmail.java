@@ -14,11 +14,11 @@ public class UsuarioEmail implements Serializable {
 
 	@EmbeddedId
 	private UsuarioEmailPK id = new UsuarioEmailPK();
-	
+
 	private Integer tipoEmail;
-	
+
 	private boolean isCriador;
-	
+
 	public UsuarioEmail() {
 	}
 
