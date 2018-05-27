@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mateus.webmail.domain.Usuario;
 
 public class UsuarioDTO implements Serializable {
 
@@ -16,6 +17,14 @@ public class UsuarioDTO implements Serializable {
 	private Date dataNascimento;
 	
 	public UsuarioDTO() {
+	}
+	
+	public UsuarioDTO(Usuario usuario) {
+		super();
+		this.id = usuario.getId();
+		this.email = usuario.getEmail();
+		this.nome = usuario.getNome();
+		this.dataNascimento = usuario.getDataNascimento();
 	}
 	
 	public UsuarioDTO(Integer id, String email, String nome, Date dataNascimento) {

@@ -71,12 +71,17 @@ public class DBService {
 		grupoRepository.saveAll(Arrays.asList(grupo1, grupo2));
 
 		Email email1 = new Email("Trabalho APS", new Date(System.currentTimeMillis()), null);
-
+		Email email2 = new Email("Trabalho Amaury", new Date(System.currentTimeMillis()), null);
+		Email email3 = new Email("Teste", new Date(System.currentTimeMillis()), null);
+		
 		email1 = emailRepository.save(email1);
+		email2 = emailRepository.save(email2);
+		email3 = emailRepository.save(email3);
 
 		EmailEnviado emailEnviado1 = new EmailEnviado(email1, user2);
-
-		user2.getEmailsEnviados().add(emailEnviado1);
+		EmailEnviado emailEnviado2 = new EmailEnviado(email2, user2);
+		EmailEnviado emailEnviado3 = new EmailEnviado(email3, user2);
+		user2.getEmailsEnviados().addAll(Arrays.asList(emailEnviado1, emailEnviado2, emailEnviado3));
 
 		SubEmail subEmail1 = new SubEmail("Já fiz minha parte", new Date(System.currentTimeMillis()), email1, user2);
 		SubEmail subEmail2 = new SubEmail("Já enviei minha parte pra Erica", new Date(System.currentTimeMillis()),
@@ -86,14 +91,16 @@ public class DBService {
 
 		UsuarioEmail userEmail1 = new UsuarioEmail(email1, user1, TipoEmailEnum.CAIXA_ENTRADA, false);
 		UsuarioEmail userEmail2 = new UsuarioEmail(email1, user2, TipoEmailEnum.CAIXA_ENTRADA, true);
-		UsuarioEmail userEmail3 = new UsuarioEmail(email1, user3, TipoEmailEnum.LIXEIRA, true);
+		UsuarioEmail userEmail3 = new UsuarioEmail(email1, user3, TipoEmailEnum.LIXEIRA, false);
+		UsuarioEmail userEmail4 = new UsuarioEmail(email2, user2, TipoEmailEnum.LIXEIRA, false);
+		UsuarioEmail userEmail5 = new UsuarioEmail(email3, user2, TipoEmailEnum.LIXEIRA, false);
 		email1.getUsuarioEmails().addAll(Arrays.asList(userEmail1, userEmail2, userEmail3));
 		user1.getUsuarioEmails().add(userEmail1);
 		user2.getUsuarioEmails().add(userEmail2);
 		user3.getUsuarioEmails().add(userEmail3);
 		
-		emailRepository.saveAll(Arrays.asList(email1));
-		usuarioEmailRepository.saveAll(Arrays.asList(userEmail1, userEmail2, userEmail3));
+		emailRepository.saveAll(Arrays.asList(email1, email2, email3));
+		usuarioEmailRepository.saveAll(Arrays.asList(userEmail1, userEmail2, userEmail3, userEmail4, userEmail5));
 		usuarioRepository.saveAll(Arrays.asList(user2));
 
 		Associado associado1 = new Associado(user1, user2, TipoAssociacaoEnum.CONTATO);

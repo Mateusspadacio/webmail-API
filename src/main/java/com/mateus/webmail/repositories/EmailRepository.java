@@ -7,4 +7,5 @@ import com.mateus.webmail.domain.Email;
 
 @Repository
 public interface EmailRepository extends JpaRepository<Email, Integer> {
+	
 }

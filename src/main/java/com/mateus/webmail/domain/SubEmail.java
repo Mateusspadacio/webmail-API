@@ -12,6 +12,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class SubEmail implements Serializable{
 
@@ -24,10 +26,12 @@ public class SubEmail implements Serializable{
 	private String texto;
 	private Date dataEnvio;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="email_id")
 	private Email email;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
