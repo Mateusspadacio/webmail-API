@@ -70,9 +70,9 @@ public class DBService {
 		usuarioRepository.saveAll(Arrays.asList(user1, user2, user3));
 		grupoRepository.saveAll(Arrays.asList(grupo1, grupo2));
 
-		Email email1 = new Email("Trabalho APS", new Date(System.currentTimeMillis()), null);
-		Email email2 = new Email("Trabalho Amaury", new Date(System.currentTimeMillis()), null);
-		Email email3 = new Email("Teste", new Date(System.currentTimeMillis()), null);
+		Email email1 = new Email("Trabalho APS", sdf.parse("20/05/2018"), null);
+		Email email2 = new Email("Trabalho Amaury", sdf.parse("15/05/2018"), null);
+		Email email3 = new Email("Teste", sdf.parse("05/04/2017"), null);
 		
 		email1 = emailRepository.save(email1);
 		email2 = emailRepository.save(email2);
