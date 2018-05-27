@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Participante implements Serializable {
 
@@ -19,10 +21,12 @@ public class Participante implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="grupo_id")
 	private Grupo grupo;

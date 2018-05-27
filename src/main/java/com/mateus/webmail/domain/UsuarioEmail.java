@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mateus.webmail.domain.enums.TipoEmailEnum;
 
 @Entity
@@ -52,6 +53,22 @@ public class UsuarioEmail implements Serializable {
 
 	public void setCriador(boolean isCriador) {
 		this.isCriador = isCriador;
+	}
+	
+	public Usuario getUsuario() {
+		return id.getUsuario();
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		id.setUsuario(usuario);
+	}
+	
+	public Email getEmail() {
+		return id.getEmail();
+	}
+	
+	public void setEmail(Email email) {
+		id.setEmail(email);
 	}
 
 	@Override

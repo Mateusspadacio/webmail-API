@@ -1,11 +1,13 @@
 package com.mateus.webmail.service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mateus.webmail.domain.Associado;
@@ -41,14 +43,17 @@ public class DBService {
 
 	@Autowired
 	private AssociadoRepository associadoRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	public void initDataBase() throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-		Usuario user1 = new Usuario("mateus@gmail.com", "Mateus", "123", sdf.parse("24/10/1996"));
-		Usuario user2 = new Usuario("joao@gmail.com", "João", "123", sdf.parse("10/08/2000"));
-		Usuario user3 = new Usuario("maria@gmail.com", "Maria", "123", sdf.parse("15/05/2005"));
-
+		DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		Usuario user1 = new Usuario("mateus@gmail.com", "Mateus", pe.encode("123"), sdf.parse("24/10/1996"));
+		Usuario user2 = new Usuario("joao@gmail.com", "João", pe.encode("123"), sdf.parse("10/08/2000"));
+		Usuario user3 = new Usuario("maria@gmail.com", "Maria", pe.encode("123"), sdf.parse("15/05/2005"));
+		
 		Grupo grupo1 = new Grupo("Faculdade", user3);
 		Grupo grupo2 = new Grupo("Amigos", user1);
 

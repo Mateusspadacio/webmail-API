@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Grupo implements Serializable {
 
@@ -23,6 +25,7 @@ public class Grupo implements Serializable {
 	private Integer id;
 	private String nome;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
@@ -63,7 +66,6 @@ public class Grupo implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
 
 	public List<Participante> getParticipantes() {
 		return participantes;

@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario implements Serializable {
 
@@ -25,7 +27,10 @@ public class Usuario implements Serializable {
 	@Column(unique = true)
 	private String email;
 	private String nome;
+
+	@JsonIgnore
 	private String senha;
+
 	private Date dataNascimento;
 
 	@OneToMany(mappedBy = "usuario")
