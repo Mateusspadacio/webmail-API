@@ -3,8 +3,9 @@ package com.mateus.webmail.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mateus.webmail.domain.Usuario;
 
 public class SubEmailDTO implements Serializable {
 
@@ -12,9 +13,11 @@ public class SubEmailDTO implements Serializable {
 	
 	private Integer id;
 	private String texto;
+	@NotNull
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataEnvio;
 	private UsuarioDTO usuario;
+	private EmailDTO email;
 	
 	public SubEmailDTO() {
 	}
@@ -57,6 +60,14 @@ public class SubEmailDTO implements Serializable {
 
 	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
+	}
+
+	public EmailDTO getEmail() {
+		return email;
+	}
+
+	public void setEmail(EmailDTO email) {
+		this.email = email;
 	}
 	
 	

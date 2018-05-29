@@ -3,6 +3,12 @@ package com.mateus.webmail.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mateus.webmail.domain.Usuario;
 
@@ -11,8 +17,16 @@ public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	@NotEmpty(message="Email obrigatório")
+	@Email
 	private String email;
+	@NotEmpty(message="Senha invalida")
+	@Length(min=5, max=30)
+	private String senha;
+	@NotEmpty(message="Nome obrigatório")
+	@Length(min=5)
 	private String nome;
+	@NotNull
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataNascimento;
 	
@@ -49,6 +63,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getNome() {

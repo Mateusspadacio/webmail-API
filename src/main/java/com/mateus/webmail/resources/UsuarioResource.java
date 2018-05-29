@@ -1,8 +1,11 @@
 package com.mateus.webmail.resources;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,5 +32,11 @@ public class UsuarioResource {
 		Page<Usuario> usuarios = usuarioService.findAllByLike(page, size, direction, orderBy, nome);
 		Page<UsuarioDTO> usuariosDTO = usuarios.map(e -> new UsuarioDTO(e.getId(), e.getEmail(), e.getNome(), e.getDataNascimento()));
 		return ResponseEntity.ok().body(usuariosDTO);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> save(@Valid @RequestBody UsuarioDTO usuarioDTO) {
+		usuarioService.save(usuarioDTO);
+		return ResponseEntity.ok().build();
 	}
 }

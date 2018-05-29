@@ -5,18 +5,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mateus.webmail.domain.SubEmail;
 import com.mateus.webmail.domain.enums.TipoEmailEnum;
 
-public class EmailDTO implements Serializable{
+public class EmailDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	@NotEmpty(message="Titulo obrigatório")
 	private String titulo;
+	@NotNull
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataCriacao;
+	@NotNull
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataAlteracao;
 	private Integer tipoEmail;

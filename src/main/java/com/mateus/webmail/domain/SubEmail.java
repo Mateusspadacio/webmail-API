@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -24,6 +25,7 @@ public class SubEmail implements Serializable{
 	private Integer id;
 	@Lob
 	private String texto;
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataEnvio;
 	
 	@JsonIgnore
